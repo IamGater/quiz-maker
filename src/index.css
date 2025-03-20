@@ -19,6 +19,10 @@ code {
 }
 
 .main{
+  position: relative;
+}
+
+.main-wrapper{
   display: grid;
   gap: 40px;
   grid-template-columns: 300px 300px 300px 300px;
@@ -44,4 +48,60 @@ code {
 .popup{
   float: right;
   cursor: pointer;
+}
+.add-quiz{
+  margin-top: 100px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  text-align: center;
+}
+
+.question,
+.answers {
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 370px;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.submit-btn{
+  margin-right: 20px;
 }

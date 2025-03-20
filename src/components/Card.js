@@ -22,7 +22,6 @@ export default function Card({ id, name, description, onDelete }) {
       )}
       <h3 className="card-name">{name}</h3>
       <p className="card-descr">{description}</p>
-      <span className="quests">15 quests</span>
     </div>
   );
 }
