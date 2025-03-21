@@ -12,17 +12,21 @@ code {
     monospace;
 }
 
+li {
+  list-style-type: none;
+}
+
 .container {
   margin: 0 auto;
   max-width: 1300px;
   padding: 0 20px;
 }
 
-.main{
+.main {
   position: relative;
 }
 
-.main-wrapper{
+.main-wrapper {
   display: grid;
   gap: 40px;
   grid-template-columns: 300px 300px 300px 300px;
@@ -41,15 +45,15 @@ code {
   margin: 0;
   margin-bottom: 20px;
 }
-.card-descr{
+.card-descr {
   margin: 0;
   margin-bottom: 40px;
 }
-.popup{
+.del-popup {
   float: right;
   cursor: pointer;
 }
-.add-quiz{
+.add-quiz {
   margin-top: 100px;
 }
 
@@ -102,6 +106,30 @@ button:hover {
   background: #0056b3;
 }
 
-.submit-btn{
+.submit-btn {
   margin-right: 20px;
+}
+.modal-wrapper {
+  display: flex;
+}
+.modal-input {
+  max-width: 50px;
+}
+.modal-ul {
+  padding: 0;
+}
+.answers-ul {
+  padding: 0;
+}
+.add-answr{
+  margin: 10px 0;
+}
+.add-quest{
+  margin-bottom: 10px;
+}
+.popup-submit{
+  margin-bottom: 10px;
+}
+.delete-quiz-btn{
+  margin-left: 10px;
 }
