@@ -129,7 +129,6 @@ function App() {
     setIsEditModalOpen(false);
     setSelectedQuiz(updatedQuiz);
 
-    // Очистить инпуты
     setQuizName("");
     setQuizDescription("");
     setQuestions([{ question: "", answers: ["", ""] }]);
