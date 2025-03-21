@@ -77,6 +77,8 @@ li {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   width: 400px;
   text-align: center;
+  max-height: 80vh;
+  overflow-y: scroll;
 }
 
 .question,
@@ -121,15 +123,15 @@ button:hover {
 .answers-ul {
   padding: 0;
 }
-.add-answr{
+.add-answer {
   margin: 10px 0;
 }
-.add-quest{
+.add-quest {
   margin-bottom: 10px;
 }
-.popup-submit{
+.popup-submit {
   margin-bottom: 10px;
 }
-.delete-quiz-btn{
-  margin-left: 10px;
+.delete-quiz-btn {
+  margin: 0 10px;
 }

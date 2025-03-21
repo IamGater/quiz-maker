@@ -19,6 +19,7 @@ function App() {
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [submittedAnswers, setSubmittedAnswers] = useState([]);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("quizzes", JSON.stringify(cards));
@@ -59,6 +60,7 @@ function App() {
 
   const addQuestion = () =>
     setQuestions([...questions, { question: "", answers: ["", ""] }]);
+
   const addAnswer = (index) => {
     const updatedQuestions = [...questions];
     updatedQuestions[index].answers.push("");
@@ -73,7 +75,8 @@ function App() {
       setSelectedAnswers(parsedAnswers);
       const submitted = quiz.questions.map((q, qIndex) => ({
         question: q.question,
-        selectedAnswer: q.answers[parsedAnswers[qIndex]] || "No answer selected",
+        selectedAnswer:
+          q.answers[parsedAnswers[qIndex]] || "No answer selected",
       }));
       setSubmittedAnswers(submitted);
     } else {
@@ -104,6 +107,32 @@ function App() {
   const handleDeleteQuiz = (quizId) => {
     setSelectedQuiz(null);
     handleDelete(quizId);
+  };
+
+  const handleEditQuiz = () => {
+    setQuizName(selectedQuiz.name);
+    setQuizDescription(selectedQuiz.description);
+    setQuestions(selectedQuiz.questions);
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateQuiz = () => {
+    const updatedQuiz = {
+      ...selectedQuiz,
+      name: quizName,
+      description: quizDescription,
+      questions: questions,
+    };
+    setCards(
+      cards.map((card) => (card.id === selectedQuiz.id ? updatedQuiz : card))
+    );
+    setIsEditModalOpen(false);
+    setSelectedQuiz(updatedQuiz);
+
+    // Очистить инпуты
+    setQuizName("");
+    setQuizDescription("");
+    setQuestions([{ question: "", answers: ["", ""] }]);
   };
 
   return (
@@ -177,6 +206,76 @@ function App() {
               >
                 Delete Quiz
               </button>
+              <button onClick={handleEditQuiz} className="edit-quiz-btn">
+                Edit Quiz
+              </button>
+            </div>
+          </div>
+        )}
+
+        {isEditModalOpen && (
+          <div className="modal-overlay">
+            <div className="modal">
+              <h2>Edit Quiz</h2>
+              <div className="question">
+                <label>Quiz Name:</label>
+                <input
+                  type="text"
+                  placeholder="Enter quiz name"
+                  value={quizName}
+                  onChange={(e) => setQuizName(e.target.value)}
+                />
+              </div>
+              <div className="answers">
+                <label>Description:</label>
+                <input
+                  type="text"
+                  placeholder="Enter description"
+                  value={quizDescription}
+                  onChange={(e) => setQuizDescription(e.target.value)}
+                />
+              </div>
+              <div className="questions-section">
+                <h3>Questions:</h3>
+                {questions.map((q, qIndex) => (
+                  <div key={qIndex} className="question-item">
+                    <input
+                      type="text"
+                      placeholder={`Enter question ${qIndex + 1}`}
+                      value={q.question}
+                      onChange={(e) =>
+                        handleQuestionChange(qIndex, e.target.value)
+                      }
+                    />
+                    <div className="answers-section">
+                      {q.answers.map((a, aIndex) => (
+                        <input
+                          key={aIndex}
+                          type="text"
+                          placeholder={`Answer ${aIndex + 1}`}
+                          value={a}
+                          onChange={(e) =>
+                            handleAnswerChange(qIndex, aIndex, e.target.value)
+                          }
+                        />
+                      ))}
+                      <button
+                        onClick={() => addAnswer(qIndex)}
+                        className="add-answer"
+                      >
+                        Add Answer
+                      </button>
+                    </div>
+                  </div>
+                ))}
+                <button onClick={addQuestion} className="add-quest">
+                  Add Question
+                </button>
+              </div>
+              <button onClick={handleUpdateQuiz} className="submit-btn">
+                Update Quiz
+              </button>
+              <button onClick={() => setIsEditModalOpen(false)}>Close</button>
             </div>
           </div>
         )}
@@ -231,7 +330,7 @@ function App() {
                         ))}
                         <button
                           onClick={() => addAnswer(qIndex)}
-                          className="add-answr"
+                          className="add-answer"
                         >
                           Add Answer
                         </button>
