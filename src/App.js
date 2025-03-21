@@ -102,9 +102,7 @@ function App() {
   };
 
   const handleDeleteQuiz = (quizId) => {
-    // Close modal if open
     setSelectedQuiz(null);
-    // Delete the quiz from the list
     handleDelete(quizId);
   };
 
@@ -173,7 +171,6 @@ function App() {
                 </div>
               )}
               <button onClick={closeQuizModal}>Close</button>
-              {/* Добавляем кнопку для удаления квиза */}
               <button
                 onClick={() => handleDeleteQuiz(selectedQuiz.id)}
                 className="delete-quiz-btn"
