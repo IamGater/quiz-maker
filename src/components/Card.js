@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { HiDotsVertical } from "react-icons/hi";
+import React from "react";
 
 export default function Card({ name, description, questionCount }) {
   return (
